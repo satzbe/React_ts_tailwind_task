@@ -46,28 +46,41 @@ const CreateForm = ({ modalopenclose, id }: FormProps) => {
         setformData({ ...formData, [name]: value })
         setError({ ...error, [name]: '' })
     };
+    const errorValidation = () => {
+        const { jobTitle, company, industry } = formData,
+            msg = 'Please Enter Min 3 characters';
+        let error: any = {}
+        let isValid = false
+        // setStep(false)
+        if (!jobTitle || jobTitle.trim().length < 3) error.jobTitle = msg;
+        if (!company || company.trim().length < 3) error.company = msg;
+        if (!industry || industry.trim().length < 3) error.industry = msg;
+        setError(error)
 
+        if (jobTitle && company && industry) isValid = true;
+        return isValid
+    }
     const nextAction = () => {
-        // errorValidation();
-        setStep(false)
+        if (errorValidation()) {
+            setStep(false)
+        }
+
     }
     const previosAction = () => {
-        // errorValidation();
         setStep(true)
     }
+
     const saveAction = () => {
-        if (formData.jobTitle && formData.company && formData.industry) {
-            if (id) {
-                axios.put(`${MockApiUrl}/${id}`, formData).then(res => {
-                    const { statusText } = res;
-                    statusText && modalopenclose(false);
-                })
-            } else {
-                axios.post(MockApiUrl, formData).then(res => {
-                    const { statusText } = res;
-                    statusText && modalopenclose(false);
-                })
-            }
+        if (id) {
+            axios.put(`${MockApiUrl}/${id}`, formData).then(res => {
+                const { statusText } = res;
+                statusText && modalopenclose(false);
+            })
+        } else {
+            axios.post(MockApiUrl, formData).then(res => {
+                const { statusText } = res;
+                statusText && modalopenclose(false);
+            })
         }
     }
 
