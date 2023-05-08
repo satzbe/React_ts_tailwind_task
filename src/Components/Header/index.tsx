@@ -13,7 +13,7 @@ const Header = ({ modalopenclose }: PopupProp) => {
       <div className='justify-self-start'>
         <Button name='Create Jobs' primary={true} action={openModal} />
       </div>
-      <h1 className='justify-self-start'>Frontend Task </h1>
+      <h1 className='justify-self-start text-2xl font-semibold'>Sk's CRUD Task</h1>
       <div />
     </div>
   );

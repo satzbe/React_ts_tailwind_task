@@ -16,7 +16,7 @@ const Home = () => {
             <Header modalopenclose={openModal} />
             <Board />
             <Model visible={open} closeModal={openModal} showClose={true}>
-                <CreateForm modalopenclose={openModal} />
+                <CreateForm id='' modalopenclose={openModal} />
             </Model>
         </>
     )

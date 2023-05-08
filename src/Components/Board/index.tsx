@@ -4,10 +4,14 @@ import axios from 'axios';
 import { MockApiUrl } from '../Resources';
 import { CardProps } from '../types';
 import Loader from '../Loader';
+import Model from '../Model';
+import CreateForm from '../Form';
 
 const Board = () => {
   const [cards, setCards] = useState<CardProps[]>([])
   const [loader, setLoader] = useState<boolean>(false);
+  const [modalOpen, setmodalOpen] = useState<boolean>(false);
+  const [editId, setEditId] = useState<string>('');
 
   useEffect(() => {
     getDatas();
@@ -27,12 +31,26 @@ const Board = () => {
     reload && getDatas()
   }
 
+  const openModal = (command: boolean) => {
+    setmodalOpen(command);
+    !command && reloadData(true);
+  }
+
+  const getId = (id: string) => {
+    setEditId(id);
+    openModal(true);
+  }
+
   return (
     <div className='lg:container mx-auto'>
       {loader && <Loader />}
       {!loader && cards.map((data, i) => {
-        return <Card key={i} {...data} setLoader={reloadData} />;
+        return <Card key={i} {...data} setLoader={reloadData} sendId={getId} />;
       })}
+      <Model visible={modalOpen} closeModal={openModal} showClose={true}>
+        <CreateForm id={editId} modalopenclose={openModal} />
+      </Model>
+
     </div>
   );
 };

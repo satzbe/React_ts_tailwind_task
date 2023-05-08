@@ -21,6 +21,7 @@ export interface CardProps extends commonProps {
   employees: string;
   id: string
   setLoader: (load: boolean) => void
+  sendId: (id: string) => void
 }
 
 export interface FormDataProps extends commonProps {
@@ -46,7 +47,10 @@ export interface PopupProp {
   modalopenclose: (arg0: boolean) => void;
 }
 
-
+export interface FormProps {
+  id: string
+  modalopenclose: (arg0: boolean) => void;
+}
 
 export interface inputProps {
   label: string

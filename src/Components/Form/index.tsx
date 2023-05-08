@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextInput from '../TextInput'
-import { FormDataProps, PopupProp, commonProps } from '../types';
+import { FormDataProps, FormProps, commonProps } from '../types';
 import { MockApiUrl, formOne, formTwo } from '../Resources';
 import Button from '../Button';
 import axios from 'axios';
@@ -27,10 +27,19 @@ const initialError = {
     industry: '',
 }
 
-const CreateForm = ({ modalopenclose }: PopupProp) => {
+const CreateForm = ({ modalopenclose, id }: FormProps) => {
     const [formData, setformData] = useState<FormDataProps>(initialData);
     const [error, setError] = useState<commonProps>(initialError);
     const [step, setStep] = useState(true);
+
+    useEffect(() => {
+        if (id) {
+            axios.get(`${MockApiUrl}/${id}`).then(res => {
+                const { data } = res;
+                setformData(data)
+            })
+        }
+    }, []);
 
     const change = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -48,10 +57,17 @@ const CreateForm = ({ modalopenclose }: PopupProp) => {
     }
     const saveAction = () => {
         if (formData.jobTitle && formData.company && formData.industry) {
-            axios.post(MockApiUrl, formData).then(res => {
-                const { statusText } = res;
-                statusText && modalopenclose(false);
-            })
+            if (id) {
+                axios.put(`${MockApiUrl}/${id}`, formData).then(res => {
+                    const { statusText } = res;
+                    statusText && modalopenclose(false);
+                })
+            } else {
+                axios.post(MockApiUrl, formData).then(res => {
+                    const { statusText } = res;
+                    statusText && modalopenclose(false);
+                })
+            }
         }
     }
 

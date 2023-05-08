@@ -5,10 +5,10 @@ import axios from 'axios';
 import { MockApiUrl } from '../Resources';
 
 const Card = (props: CardProps) => {
-  const { jobTitle, company, industry, location, id, minexperience, maxexperience, minsalary, maxsalary, employees, setLoader } = props;
+  const { jobTitle, company, industry, location, id, minexperience, maxexperience, minsalary, maxsalary, employees, setLoader, sendId } = props;
 
   const editAction = () => {
-    console.log('id', id)
+    sendId(id);
   }
   const deleteAction = () => {
     axios.delete(`${MockApiUrl}/${id}`).then(res => setLoader(true))
