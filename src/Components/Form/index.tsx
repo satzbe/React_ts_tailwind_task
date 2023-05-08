@@ -39,7 +39,7 @@ const CreateForm = ({ modalopenclose, id }: FormProps) => {
                 setformData(data)
             })
         }
-    }, []);
+    }, [id]);
 
     const change = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
