@@ -5,7 +5,7 @@ import axios from 'axios';
 import { MockApiUrl } from '../Resources';
 
 const Card = (props: CardProps) => {
-  const { jobTitle, company, industry, location, id, minexperience, maxexperience, minsalary, maxsalary, employees, setLoader, sendId } = props;
+  const { jobTitle, company, industry, type, location, id, minexperience, maxexperience, minsalary, maxsalary, employees, setLoader, sendId } = props;
 
   const editAction = () => {
     sendId(id);
@@ -30,14 +30,14 @@ const Card = (props: CardProps) => {
         </div>
       </div>
       <img
-        src='https://www.freepnglogos.com/uploads/netflix-logo-app-png-16.png'
+        src={require('../../Assets/logo.png')}
         alt='logo'
         className='w-[50px] h-[50px] mr-[8px]'
       />
       <div>
         <p className='text-xl'>{jobTitle}</p>
         <p className='text-md'>{company} - {industry}</p>
-        <p className='text-md text-plh mb-6'>{location}</p>
+        <p className='text-md text-plh mb-6'>{location} ({type})</p>
         <p className='text-md mb-2'>Part-time (9.00 am - 5.00 pm IST)</p>
         {(minexperience && maxexperience) && <p className='text-md mb-2'>Experience ({minexperience} - {maxexperience} years)</p>}
         {(minsalary && maxsalary) && <p className='text-md mb-2'>INR (₹) {minsalary} - {maxsalary}</p>}
