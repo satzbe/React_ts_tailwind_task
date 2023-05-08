@@ -15,7 +15,7 @@ const Card = (props: CardProps) => {
   }
 
   return (
-    <div className='max-w-[830px] w-full h-[320px] flex py-4 px-6 m-6 bg-default rounded-md relative'>
+    <div className='max-w-[830px] w-full h-[320px] flex py-4 px-6 my-6 bg-default rounded-md relative'>
       <div className='flex justify-end absolute top-5 right-5'>
         <div className='cursor-pointer' onClick={editAction}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2 text-mainColor">

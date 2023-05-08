@@ -42,7 +42,7 @@ const Board = () => {
   }
 
   return (
-    <div className='lg:container mx-auto'>
+    <div className='xl:container mx-auto flex flex-wrap'>
       {loader && <Loader />}
       {!loader && cards.map((data, i) => {
         return <Card key={i} {...data} setLoader={reloadData} sendId={getId} />;
